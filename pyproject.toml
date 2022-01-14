@@ -1,0 +1,19 @@
+[project]
+name = "mlpt"
+version = "0.1"
+description = "ML Project Template"
+
+[tool.black]
+line-length = 120
+exclude = "(.eggs|.git|.hg|.mypy_cache|.venv|_build|buck-out|build|dist)"
+
+[tool.pytest.ini_options]
+
+
+[[tool.mypy.overrides]]
+module = [""]
+ignore_missing_imports = true
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"

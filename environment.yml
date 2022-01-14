@@ -1,0 +1,9 @@
+name: python-ml-project-template
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - pip-tools
+    - invoke
