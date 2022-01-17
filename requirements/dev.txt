@@ -8,6 +8,8 @@ attrs==21.4.0
     # via pytest
 cfgv==3.3.1
     # via pre-commit
+coverage[toml]==6.2
+    # via pytest-cov
 distlib==0.3.4
     # via virtualenv
 filelock==3.4.2
@@ -33,6 +35,10 @@ py==1.11.0
 pyparsing==3.0.6
     # via packaging
 pytest==6.2.5
+    # via
+    #   -r requirements/dev.in
+    #   pytest-cov
+pytest-cov==3.0.0
     # via -r requirements/dev.in
 pyyaml==6.0
     # via pre-commit
@@ -42,5 +48,7 @@ toml==0.10.2
     # via
     #   pre-commit
     #   pytest
+tomli==2.0.0
+    # via coverage
 virtualenv==20.13.0
     # via pre-commit

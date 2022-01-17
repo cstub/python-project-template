@@ -3,3 +3,4 @@
 invoke
 pre-commit
 pytest
+pytest-cov
