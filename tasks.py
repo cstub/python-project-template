@@ -1,9 +1,20 @@
+from typing import Optional
+
 from invoke import task
 
 
-@task
-def precommit_install(c):
-    c.run("pre-commit install")
+def _run_pytest(c, test_dir, cov=False, cov_report=None):
+    c.run(f"pytest {test_dir} {_pytest_cov_options(cov, cov_report)}", pty=True)
+
+
+def _pytest_cov_options(use_cov: bool, cov_reports: Optional[str]):
+    if not use_cov:
+        return ""
+
+    cov_report_types = cov_reports.split(",") if cov_reports else []
+    cov_report_types = ["term"] + cov_report_types
+    cov_report_params = [f"--cov-report {r}" for r in cov_report_types]
+    return f"--cov {' '.join(cov_report_params)}"
 
 
 @task
@@ -13,10 +24,16 @@ def conda_install(c):
 
 @task
 def pip_install(c):
+    c.run("pip install --upgrade pip")
     c.run("pip-compile requirements/prod.in")
     c.run("pip-compile requirements/dev.in")
     c.run("pip-sync requirements/prod.txt requirements/dev.txt")
     c.run("pip install -e .")
+
+
+@task
+def precommit_install(c):
+    c.run("pre-commit install")
 
 
 @task
@@ -37,26 +54,32 @@ def clean_test(c):
 
 
 @task
-def clean(c):
-    clean_cache(c)
-    clean_test(c)
+def clean_build(c):
+    c.run("rm -fr dist")
 
 
 @task
-def lint(c):
+def clean(c):
+    clean_cache(c)
+    clean_test(c)
+    clean_build(c)
+
+
+@task(aliases=["cc"])
+def code_check(c):
     c.run("pre-commit run --all-files", pty=True)
 
 
 @task(aliases=["ut"])
-def unit_test(c):
-    c.run("pytest tests/unit", pty=True)
+def unit_test(c, cov=False, cov_report=None):
+    _run_pytest(c, "tests/unit", cov, cov_report)
 
 
 @task(aliases=["it"])
-def integration_test(c):
-    c.run("pytest tests/integration", pty=True)
+def integration_test(c, cov=False, cov_report=None):
+    _run_pytest(c, "tests/integration", cov, cov_report)
 
 
 @task
-def test(c):
-    c.run("pytest tests", pty=True)
+def test(c, cov=False, cov_report=None):
+    _run_pytest(c, "tests", cov, cov_report)

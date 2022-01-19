@@ -1,10 +1,10 @@
 # Python ML Project Template
 
-## Setup on single machine
+## Setup on single Machine
 
 ```shell
 # setup conda env
-make conda-install
+conda env create -f environment.yml
 
 # activate env
 conda activate python-ml-project-template
@@ -22,7 +22,7 @@ invoke precommit-install
 
 ```shell
 # create conda env
-make conda-install
+conda env create -f environment.yml
 
 # activate env
 conda activate python-ml-project-template
@@ -48,10 +48,12 @@ conda activate build-tools
 invoke precommit-install
 ```
 
-## Code Formatting & Style Checks
+## Code Formatting, Style and Type Checks
 
 ```shell
-invoke lint
+invoke code-check
+# or
+invoke cc
 ```
 
 ## Testing
@@ -70,3 +72,13 @@ invoke it
 # all tests
 invoke test
 ```
+
+## Create a Distribution Package
+
+To create a [distribution package](https://packaging.python.org/en/latest/tutorials/packaging-projects/) use the following command:
+
+```shell
+python -m build
+```
+
+After the build process has finished the `sdist` and `wheel` packages are available in the `/dist` folder.

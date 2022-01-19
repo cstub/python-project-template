@@ -1,5 +1,7 @@
 -c prod.txt
 
+build
 invoke
 pre-commit
 pytest
+pytest-cov
