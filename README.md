@@ -48,10 +48,12 @@ conda activate build-tools
 invoke precommit-install
 ```
 
-## Code Formatting & Style Checks
+## Code Formatting, Style and Type Checks
 
 ```shell
-invoke lint
+invoke code-check
+# or
+invoke cc
 ```
 
 ## Testing
@@ -73,10 +75,10 @@ invoke test
 
 ## Create a Distribution Package
 
-To create a [distribution package](https://packaging.python.org/en/latest/tutorials/packaging-projects/) the `build` package must be added to `requirements/dev.in` file.
-
-Afterwards the `sdist` and `wheel` packages can be built using the following command:
+To create a [distribution package](https://packaging.python.org/en/latest/tutorials/packaging-projects/) use the following command:
 
 ```shell
 python -m build
 ```
+
+After the build process has finished the `sdist` and `wheel` packages are available in the `/dist` folder.

@@ -6,6 +6,8 @@
 #
 attrs==21.4.0
     # via pytest
+build==0.7.0
+    # via -r requirements/dev.in
 cfgv==3.3.1
     # via pre-commit
 coverage[toml]==6.2
@@ -23,7 +25,11 @@ invoke==1.6.0
 nodeenv==1.6.0
     # via pre-commit
 packaging==21.3
-    # via pytest
+    # via
+    #   build
+    #   pytest
+pep517==0.12.0
+    # via build
 platformdirs==2.4.1
     # via virtualenv
 pluggy==1.0.0
@@ -49,6 +55,9 @@ toml==0.10.2
     #   pre-commit
     #   pytest
 tomli==2.0.0
-    # via coverage
+    # via
+    #   build
+    #   coverage
+    #   pep517
 virtualenv==20.13.0
     # via pre-commit
