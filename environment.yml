@@ -1,9 +1,7 @@
 name: python-project-template
 channels:
-  - defaults
+  - conda-forge
 dependencies:
-  - python=3.8
-  - pip
+  - python=3.9
+  - pip>=21.3
   - pip:
-    - pip-tools
-    - invoke

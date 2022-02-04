@@ -1,7 +1,7 @@
 # Python Project Template
 
 A Python project template using [conda](https://docs.conda.io/en/latest/) to manage virtual environments
-and [pip-tools](https://github.com/jazzband/pip-tools) for dependency management.
+and [Poetry](https://python-poetry.org/) to manage project dependencies and create Python packages.
 
 The template uses [pre-commit hooks](https://pre-commit.com/) to run code style and code quality checks for each Git commit and
 provides several [invoke](https://www.pyinvoke.org/) commands for common development [tasks](tasks.py).
@@ -12,6 +12,20 @@ The following tools are used for project development:
 * [flake8](https://flake8.pycqa.org/en/latest/) for code style checks,
 * [mypy](http://mypy-lang.org/) for type checking,
 * [pytest](https://docs.pytest.org/en/7.0.x/) for test execution.
+
+*Note*: A version of this project template using [pip-tools](https://github.com/jazzband/pip-tools) is available on the corresponding [branch](https://github.com/cstub/python-project-template/tree/pip-tools).
+
+## Prerequisites
+
+### Install Anaconda / Miniconda
+
+Install [Anaconda](https://docs.anaconda.com/anaconda/install/index.html)
+or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) by following the instructions outlined
+in the respective documentation.
+
+### Install Poetry
+
+Install Poetry using the official [installer](https://python-poetry.org/docs/master/#installing-with-the-official-installer).
 
 ## Setup
 
@@ -27,15 +41,14 @@ conda env create -f environment.yml
 conda activate python-project-template
 
 # install dependencies
-invoke pip-install
+poetry install
 
 # install pre-commit hook
 invoke precommit-install
 ```
 
-This sequence of commands creates the project environment using conda, compiles the python dependencies specified in the [requirement files](requirements)
-and installs the dependencies into the newly created environment. Afterwards the pre-commit hooks are installed and executed
-automatically upon each Git commit.
+This sequence of commands creates the project environment using conda and installs the Python dependencies specified in the [pyproject.toml](pyproject.toml) file into the newly created environment.
+Afterwards the pre-commit hooks are installed and registered for automatic execution on each Git commit.
 
 ### Setup using Remote Interpreter
 
@@ -49,7 +62,7 @@ conda env create -f environment.yml
 conda activate python-project-template
 
 # install dependencies
-invoke pip-install
+poetry install
 ```
 
 To run the Git pre-commit hooks in a local environment, the following commands can be used locally:
@@ -58,6 +71,7 @@ To run the Git pre-commit hooks in a local environment, the following commands c
 # create and activate build tools environment
 conda create -n build-tools python=3.9
 conda activate build-tools
+
 # install build tool dependencies
 pip install pre-commit
 pip install invoke

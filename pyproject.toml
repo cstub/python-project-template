@@ -1,27 +1,48 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
+[tool.poetry]
 name = "python-project-template"
+version = "0.1.0"
+description = "Python Project Template using Conda and Poetry"
+license = "Apache-2.0"
+authors = ["Christoph Stumpf <stumpf.christoph@gmail.com>"]
 readme = "README.md"
-authors = [
-    {name = "Christoph Stumpf", email = "stumpf.christoph@gmail.com"},
-]
+homepage = "https://github.com/cstub/python-project-template"
+keywords= ["python", "project-template"]
 classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
 ]
-dynamic = ["version", "description"]
-requires-python = ">=3.8"
+packages = [
+    { include = "ppt" },
+]
 
-[tool.flit.module]
-name = "ppt"
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0.0"
+pytest-cov = "^3.0.0"
+invoke = "^1.6.0"
+pre-commit = "^2.17.0"
 
 [tool.black]
 line-length = 120
 exclude = "(.eggs|.git|.hg|.mypy_cache|.venv|_build|buck-out|build|dist)"
 
+[tool.isort]
+known_first_party = [
+    "ppt",
+]
+skip_glob = []
+profile = "black"
+line_length = 120
+
 [tool.mypy]
-python_version = 3.8
+python_version = 3.9
 check_untyped_defs = true
 ignore_missing_imports = true
 
