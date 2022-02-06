@@ -1,54 +1,78 @@
-# Python ML Project Template
+# Python Project Template
 
-## Setup on single Machine
+A Python project template using [conda](https://docs.conda.io/en/latest/) to manage virtual environments
+and [pip-tools](https://github.com/jazzband/pip-tools) for dependency management.
+
+The template uses [pre-commit hooks](https://pre-commit.com/) to run code style and code quality checks for each Git commit and
+provides several [invoke](https://www.pyinvoke.org/) commands for common development [tasks](tasks.py).
+
+The following tools are used for project development:
+
+* [black](https://github.com/psf/black) for code formatting,
+* [flake8](https://flake8.pycqa.org/en/latest/) for code style checks,
+* [mypy](http://mypy-lang.org/) for type checking,
+* [pytest](https://docs.pytest.org/en/7.0.x/) for test execution.
+
+## Setup
+
+### Setup on a local machine
+
+To set up the development environment on a single machine run the following commands:
 
 ```shell
-# setup conda env
+# setup conda environment
 conda env create -f environment.yml
 
-# activate env
-conda activate python-ml-project-template
+# activate conda environment
+conda activate python-project-template
 
 # install dependencies
 invoke pip-install
 
-# install pre-commit
+# install pre-commit hook
 invoke precommit-install
 ```
 
-## Setup using Remote Interpreter
+This sequence of commands creates the project environment using conda, compiles the python dependencies specified in the [requirement files](requirements)
+and installs the dependencies into the newly created environment. Afterwards the pre-commit hooks are installed and executed
+automatically upon each Git commit.
 
-### Remote machine
+### Setup using Remote Interpreter
+
+If a remote interpreter is employed (e.g. by using a [PyCharm SSH interpreter](https://www.jetbrains.com/help/pycharm/configuring-remote-interpreters-via-ssh.html)), the project environment can be installed on the remote machine using the following commands:
 
 ```shell
-# create conda env
+# create conda environment
 conda env create -f environment.yml
 
-# activate env
-conda activate python-ml-project-template
+# activate environment
+conda activate python-project-template
 
 # install dependencies
 invoke pip-install
 ```
 
-### Local machine
+To run the Git pre-commit hooks in a local environment, the following commands can be used locally:
 
-One-time setup of `build-tools` env:
 ```shell
-conda create -n build-tools python=3.8
+# create and activate build tools environment
+conda create -n build-tools python=3.9
 conda activate build-tools
+# install build tool dependencies
 pip install pre-commit
 pip install invoke
 ```
 
-Install project pre-commit hooks:
+Install project pre-commit hooks using:
 ```shell
-conda activate build-tools
-
 invoke precommit-install
 ```
 
-## Code Formatting, Style and Type Checks
+## Usage
+
+The project template provides [invoke](https://www.pyinvoke.org/) [tasks](tasks.py) to execute common development tasks.
+
+Execute code formatting, style and type checks using:
 
 ```shell
 invoke code-check
@@ -56,29 +80,32 @@ invoke code-check
 invoke cc
 ```
 
-## Testing
+Run the unit tests using:
 
-```shell
-# unit tests
+```bash
 invoke unit-test
 # or
 invoke ut
+```
 
-# integration tests
+Run the integration tests using:
+
+```bash
 invoke integration-test
 # or
 invoke it
-
-# all tests
-invoke test
 ```
 
-## Create a Distribution Package
+The complete test suite can be executed by running:
+
+```bash
+invoke test
+```
 
 To create a [distribution package](https://packaging.python.org/en/latest/tutorials/packaging-projects/) use the following command:
 
 ```shell
-python -m build
+invoke build
 ```
 
 After the build process has finished the `sdist` and `wheel` packages are available in the `/dist` folder.

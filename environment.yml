@@ -1,4 +1,4 @@
-name: python-ml-project-template
+name: python-project-template
 channels:
   - defaults
 dependencies:

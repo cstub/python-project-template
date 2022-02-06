@@ -3,19 +3,18 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "ml-project-template"
+name = "python-project-template"
 readme = "README.md"
 authors = [
     {name = "Christoph Stumpf", email = "stumpf.christoph@gmail.com"},
 ]
 classifiers = [
-    "License :: OSI Approved :: MIT License",
 ]
 dynamic = ["version", "description"]
 requires-python = ">=3.8"
 
 [tool.flit.module]
-name = "mlpt"
+name = "ppt"
 
 [tool.black]
 line-length = 120
@@ -29,4 +28,4 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 
 [tool.coverage.run]
-source = ["mlpt"]
+source = ["ppt"]

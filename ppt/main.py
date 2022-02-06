@@ -1,4 +1,4 @@
-from mlpt.constants import HELLO_MESSAGE
+from ppt.constants import HELLO_MESSAGE
 
 
 def print_message(message: str):
