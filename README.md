@@ -13,6 +13,8 @@ The following tools are used for project development:
 * [mypy](http://mypy-lang.org/) for type checking,
 * [pytest](https://docs.pytest.org/en/7.0.x/) for test execution.
 
+*Note*: A version of this project template using [Poetry](https://python-poetry.org/) is available on the [main branch](https://github.com/cstub/python-project-template).
+
 ## Setup
 
 ### Setup on a local machine
