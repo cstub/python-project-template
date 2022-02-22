@@ -10,15 +10,6 @@ def conda_install(c):
 
 
 @task
-def pip_install(c):
-    c.run("pip install --upgrade 'pip<22'", pty=_use_pty())
-    c.run("pip-compile requirements/prod.in", pty=_use_pty())
-    c.run("pip-compile requirements/dev.in", pty=_use_pty())
-    c.run("pip-sync requirements/prod.txt requirements/dev.txt", pty=_use_pty())
-    c.run("pip install -e .", pty=_use_pty())
-
-
-@task
 def precommit_install(c):
     c.run("pre-commit install", pty=_use_pty())
 
@@ -55,7 +46,7 @@ def clean(c):
 @task
 def build(c):
     clean_build(c)
-    c.run("python -m build", pty=_use_pty())
+    c.run("poetry build", pty=_use_pty())
 
 
 @task(aliases=["cc"])
