@@ -25,7 +25,7 @@ repos:
       - id: yesqa
 
   - repo: https://github.com/omnilib/ufmt
-    rev: v1.3.1
+    rev: v1.3.2
     hooks:
       - id: ufmt
         additional_dependencies:
